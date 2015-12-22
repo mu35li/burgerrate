@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/semantic.min.css') }}">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="ui page grid">
+    <div class="sixteen wide column">
+    <h1>Burgerrate</h1>
+    <p>Hallo</p>
+      <div class="ui secondary pointing menu">
+        <a class="{% if activePage == 'index'  %} active {% endif %} item" href="{{ url_for('index') }}">
+          <i class="home icon"></i> Home
+        </a>
+        <div class="right menu">
+          <div class="item">
+            <div class="ui transparent icon input">
+              <input type="text" placeholder="Search...">
+            </div>
+          </div>
+        </div>
+      </div>
+    {% block body %}
+    {% endblock %}
+    </div>
+    </div>
+    <div class="footer">
+      {% block footer %}
+      {% endblock %}
+    </div>
+
+    {% block modals %}
+    {% endblock %}
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{url_for('static', filename='js/semantic.js')}}"></script>
+    <script src="{{url_for('static', filename='js/style.js')}}"></script>
+    {% block scripts %}
+    {% endblock %}
+
+  </body>
+</html>
