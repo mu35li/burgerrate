@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% set activePage = "index" %}
+{% block title %}Welcome{% endblock %}
+{% block body %}
+<h1>New Rating woop woop</h1>
+<form class="ui form" method="POST" action="{{ url_for('saveRating')}}">
+{{ form.csrf_token }}
+  <div class="field">
+    <label>{{ form.restaurantName.label }}</label>
+    {{ form.restaurantName(size=20) }}
+  </div>
+  <button class="ui button" type="submit">Create Rating</button>
+</form>
+{% endblock %}
