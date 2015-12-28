@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/semantic.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/additional.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -27,8 +28,11 @@
         <a class="{% if activePage == 'index'  %} active {% endif %} item" href="{{ url_for('index') }}">
           <i class="fa fa-home"></i> Home
         </a>
-        <a class="{% if activePage == 'newRating'  %} active {% endif %} item" href="{{ url_for('newRating') }}">
-          <i class="fa fa-burger"></i> New Rating
+        <a class="{% if activePage == 'list'  %} active {% endif %} item" href="{{ url_for('listRestaurants') }}">
+          <i class="fa fa-cutlery"></i> Restaurants
+        </a>
+        <a class="{% if activePage == 'newRestaurant'  %} active {% endif %} item" href="{{ url_for('newRestaurant') }}">
+          <i class="fa fa-burger"></i> Add Restaurant
         </a>
         <div class="right menu">
           <div class="item">
@@ -53,8 +57,8 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{{url_for('static', filename='js/semantic.js')}}"></script>
-    <script src="{{url_for('static', filename='js/style.js')}}"></script>
+    <script src="{{url_for('static', filename='js/semantic.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/additional.js')}}"></script>
     {% block scripts %}
     {% endblock %}
 

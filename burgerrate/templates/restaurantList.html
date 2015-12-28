@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% set activePage = "list" %}
+{% block title %}Restaurants{% endblock %}
+{% block body %}
+
+{% for restaurant in restaurants %}
+
+<div class="ui card">
+  <div class="image">
+    <img>
+  </div>
+  <div class="content">
+    <a class="header">{{ restaurant.name }}</a>
+    <div class="meta">
+      <span class="date">Added yesterday</span>
+    </div>
+    <div class="description">
+      Burger restaurant in Hamburg
+    </div>
+  </div>
+  <div class="extra content">
+  {% if restaurant.overallRating %}
+      Overall Rating:
+      <div class="ui indicating progress ratingBar" id="ratingBar" data-total="10" data-value="{{ restaurant.overallRating | round(1) }}">
+        <div class="bar">
+          <div class="progress">{{ restaurant.overallRating | round(1) }}</div>
+        </div>
+      </div>
+  Burger Rating:
+      <div class="ui indicating progress ratingBar" data-total="10" data-value="{{ restaurant.burgerRating | round(1) }}">
+        <div class="bar">
+          <div class="progress">{{ restaurant.burgerRating | round(1) }}</div>
+        </div>
+      </div>
+  Sides Rating:
+      <div class="ui indicating progress ratingBar" data-total="10" data-value="{{ restaurant.sidesRating | round(1) }}">
+        <div class="bar">
+          <div class="progress">{{ restaurant.sidesRating | round(1) }}</div>
+        </div>
+      </div>
+  Service Rating:
+      <div class="ui indicating progress ratingBar" data-total="10" data-value="{{ restaurant.serviceRating | round(1) }}">
+        <div class="bar">
+          <div class="progress">{{ restaurant.serviceRating | round(1) }}</div>
+        </div>
+      </div>
+  {% else %}
+    Restaurant not rated yet. <a href="{{url_for('addRating', restaurantId=restaurant.id)}}">Rate Now!</a>
+  {% endif %}
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

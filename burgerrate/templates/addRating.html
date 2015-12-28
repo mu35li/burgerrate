@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% set activePage = "addRating" %}
+{% block title %}New Rating for {{restaurant.name}}{% endblock %}
+{% block body %}
+<h1>Add rating for {{restaurant.name}}</h1>
+<form class="ui form" method="POST" action="{{ url_for('addRating', restaurantId=restaurant.id)}}">
+{{ form.csrf_token }}
+<h2>Service</h2>
+  <div class="field">
+    <label>{{ form.offerRating.label }}</label>
+    {{ form.offerRating }}
+  </div>
+  <div class="field">
+    <label>{{ form.waiterRating.label }}</label>
+    {{ form.waiterRating }}
+  </div>
+  <div class="field">
+    <label>{{ form.athmosphereRating.label }}</label>
+    {{ form.athmosphereRating }}
+  </div>
+  <div class="ui divider"></div>
+<h2>Burger</h2>
+  <div class="field">
+    <label>{{ form.burgerName.label }}</label>
+    {{ form.burgerName(size=20) }}
+  </div>
+  <div class="field">
+    <label>{{ form.meatRating.label }}</label>
+    {{ form.meatRating }}
+  </div>
+  <div class="field">
+    <label>{{ form.sauceRating.label }}</label>
+    {{ form.sauceRating }}
+  </div>
+  <div class="field">
+    <label>{{ form.burgerQualityRating.label }}</label>
+    {{ form.burgerQualityRating }}
+  </div>
+  <div class="ui divider"></div>
+  <h2>Side dish</h2>
+  <div class="field">
+    <label>{{ form.sideName.label }}</label>
+    {{ form.sideName(size=20) }}
+  </div>
+  <div class="field">
+    <label>{{ form.sidesQualityRating.label }}</label>
+    {{ form.sidesQualityRating }}
+  </div>
+  <div class="field">
+    <label>{{ form.sidesQuantityRating.label }}</label>
+    {{ form.sidesQuantityRating }}
+  </div>
+  <button class="ui button" type="submit">Add Rating</button>
+</form>
+{% endblock %}
