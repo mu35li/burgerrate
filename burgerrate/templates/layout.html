@@ -25,13 +25,13 @@
     <h1>Burgerrate</h1>
     <p>Hallo</p>
       <div class="ui secondary pointing menu">
-        <a class="{% if activePage == 'index'  %} active {% endif %} item" href="{{ url_for('index') }}">
-          <i class="fa fa-home"></i> Home
+        <a class="{% if activePage == 'index' %}active{% endif %} item" href="{{ url_for('index') }}">
+          <i class="fa fa-home icon"></i> Home
         </a>
-        <a class="{% if activePage == 'list'  %} active {% endif %} item" href="{{ url_for('listRestaurants') }}">
+        <a class="{% if activePage == 'list' %}active{% endif %} item" href="{{ url_for('listRestaurants') }}">
           <i class="fa fa-cutlery"></i> Restaurants
         </a>
-        <a class="{% if activePage == 'newRestaurant'  %} active {% endif %} item" href="{{ url_for('newRestaurant') }}">
+        <a class="{% if activePage == 'newRestaurant' %}active{% endif %} item" href="{{ url_for('newRestaurant') }}">
           <i class="fa fa-burger"></i> Add Restaurant
         </a>
         <div class="right menu">

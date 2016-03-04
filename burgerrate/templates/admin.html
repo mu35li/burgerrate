@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% set activePage = "admin" %}
+{% block title %}Admin Area{% endblock %}
+{% block body %}
+<h1>Welcome to the admin interface</h1>
+{% for restaurant in restaurants %}
+	Name: {{ restaurant.name }} <br>
+	final state: {{ restaurant.isFinal }} <br>
+	<form action="{{ url_for('admin')}}" method="POST">
+		<input type="hidden" name="state">
+	</form>
+	<div class="ui divider"></div>
+{% endfor %}
+{% endblock %}
