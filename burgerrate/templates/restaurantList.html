@@ -45,9 +45,9 @@
           <div class="progress">{{ restaurant.serviceRating | round(1) }}</div>
         </div>
       </div>
-      <a href="{{url_for('addRating', restaurantId=restaurant.id)}}">Add</a> another rating.
+      <a href="{{url_for('addRating', restaurantId=restaurant.id)}}">Add another rating.</a>
   {% else %}
-    Restaurant not rated yet. <a href="{{url_for('addRating', restaurantId=restaurant.id)}}">Rate Now!</a>
+     <a href="{{url_for('addRating', restaurantId=restaurant.id)}}">Restaurant not rated yet. Rate Now!</a>
   {% endif %}
   </div>
 </div>
