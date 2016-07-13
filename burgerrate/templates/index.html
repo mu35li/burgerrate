@@ -2,5 +2,8 @@
 {% set activePage = "index" %}
 {% block title %}Welcome{% endblock %}
 {% block body %}
-<h1>Hello World</h1>
+<h1>Welcome to Burgerrate!</h1>
+<p>Burgerrate is a community-driven platform for rating burger restaurants.<br>
+Get started by rating the burgers at one of the places listed <a href="{{url_for('listRestaurants')}}"> over here</a> or <a href="{{url_for('newRestaurant')}}">add a restaurant</a> if it's not there yet. <br><br>
+Have fun!</p>
 {% endblock %}
