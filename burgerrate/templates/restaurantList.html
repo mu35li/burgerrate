@@ -3,54 +3,59 @@
 {% block title %}Restaurants{% endblock %}
 {% block body %}
 <div class="ui cards">
-{% for restaurant in restaurants %}
+{% if restaurants|length == 0 %}
+  <p>There were no restaurants added yet. 
+  <a href="{{url_for('newRestaurant')}}">Add one!</a></p>
+{% else %}
+  {% for restaurant in restaurants %}
 
-<div class="ui card">
-  <div class="image">
-    <img>
-  </div>
-  <div class="content">
-    <a class="header">{{ restaurant.name }}</a>
-    <div class="meta">
-      <span class="date">Added yesterday</span>
+  <div class="ui card">
+    <div class="image">
+      <img>
     </div>
-    <div class="description">
-      Burger restaurant in Hamburg
+    <div class="content">
+      <a class="header">{{ restaurant.name }}</a>
+      <div class="meta">
+        <span class="date">Added yesterday</span>
+      </div>
+      <div class="description">
+        Burger restaurant in Hamburg
+      </div>
+    </div>
+    <div class="extra content">
+    {% if restaurant.overallRating %}
+        <h3>Overall Rating:</h3>
+        <div class="ui indicating large progress ratingBar" id="ratingBar" data-total="10" data-value="{{ restaurant.overallRating | round(1) }}">
+          <div class="bar">
+            <div class="progress">{{ restaurant.overallRating | round(1) }}</div>
+          </div>
+        </div>
+        <div class="divider ui"></div>
+    Burger Rating:
+        <div class="ui indicating progress ratingBar" data-total="10" data-value="{{ restaurant.burgerRating | round(1) }}">
+          <div class="bar">
+            <div class="progress">{{ restaurant.burgerRating | round(1) }}</div>
+          </div>
+        </div>
+    Sides Rating:
+        <div class="ui indicating progress ratingBar" data-total="10" data-value="{{ restaurant.sidesRating | round(1) }}">
+          <div class="bar">
+            <div class="progress">{{ restaurant.sidesRating | round(1) }}</div>
+          </div>
+        </div>
+    Service Rating:
+        <div class="ui indicating progress ratingBar" data-total="10" data-value="{{ restaurant.serviceRating | round(1) }}">
+          <div class="bar">
+            <div class="progress">{{ restaurant.serviceRating | round(1) }}</div>
+          </div>
+        </div>
+        <a href="{{url_for('addRating', restaurantId=restaurant.id)}}">Add another rating.</a>
+    {% else %}
+       <a href="{{url_for('addRating', restaurantId=restaurant.id)}}">Restaurant not rated yet. Rate Now!</a>
+    {% endif %}
     </div>
   </div>
-  <div class="extra content">
-  {% if restaurant.overallRating %}
-      <h3>Overall Rating:</h3>
-      <div class="ui indicating large progress ratingBar" id="ratingBar" data-total="10" data-value="{{ restaurant.overallRating | round(1) }}">
-        <div class="bar">
-          <div class="progress">{{ restaurant.overallRating | round(1) }}</div>
-        </div>
-      </div>
-      <div class="divider ui"></div>
-  Burger Rating:
-      <div class="ui indicating progress ratingBar" data-total="10" data-value="{{ restaurant.burgerRating | round(1) }}">
-        <div class="bar">
-          <div class="progress">{{ restaurant.burgerRating | round(1) }}</div>
-        </div>
-      </div>
-  Sides Rating:
-      <div class="ui indicating progress ratingBar" data-total="10" data-value="{{ restaurant.sidesRating | round(1) }}">
-        <div class="bar">
-          <div class="progress">{{ restaurant.sidesRating | round(1) }}</div>
-        </div>
-      </div>
-  Service Rating:
-      <div class="ui indicating progress ratingBar" data-total="10" data-value="{{ restaurant.serviceRating | round(1) }}">
-        <div class="bar">
-          <div class="progress">{{ restaurant.serviceRating | round(1) }}</div>
-        </div>
-      </div>
-      <a href="{{url_for('addRating', restaurantId=restaurant.id)}}">Add another rating.</a>
-  {% else %}
-     <a href="{{url_for('addRating', restaurantId=restaurant.id)}}">Restaurant not rated yet. Rate Now!</a>
-  {% endif %}
-  </div>
-</div>
-{% endfor %}
+  {% endfor %}
+{% endif %}
 </div>
 {% endblock %}
