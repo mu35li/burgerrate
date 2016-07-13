@@ -23,16 +23,16 @@
     <div class="ui page grid">
     <div class="sixteen wide column">
     <h1>Burgerrate</h1>
-    <p>Hallo</p>
+    <p>A community-driven rating page for burger restaurants</p>
       <div class="ui secondary pointing menu">
         <a class="{% if activePage == 'index' %}active{% endif %} item" href="{{ url_for('index') }}">
           <i class="fa fa-home icon"></i> Home
         </a>
         <a class="{% if activePage == 'list' %}active{% endif %} item" href="{{ url_for('listRestaurants') }}">
-          <i class="fa fa-cutlery"></i> Restaurants
+          <i class="fa fa-cutlery icon"></i> Restaurants
         </a>
         <a class="{% if activePage == 'newRestaurant' %}active{% endif %} item" href="{{ url_for('newRestaurant') }}">
-          <i class="fa fa-burger"></i> Add Restaurant
+          <i class="fa fa-plus icon"></i> Add Restaurant
         </a>
         <div class="right menu">
           <div class="item">
