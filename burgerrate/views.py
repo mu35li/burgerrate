@@ -1,7 +1,8 @@
 from burgerrate import app, db
 from burgerrate.forms import RestaurantForm, RatingForm
 from burgerrate.models import Rating, Restaurant
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, json
+import Levenshtein
 
 @app.route("/")
 def index():
@@ -56,7 +57,23 @@ def admin():
 def restaurantDetails(restaurantId):
     if restaurantId is not None:
         restaurant = Restaurant.query.get(restaurantId)
-        return render_template('restaurantRating.html', restaurant=restaurant)
+        ratings = Rating.query.filter_by(restaurantId=restaurant.id).all()
+
+        burgers = {}
+        for rating in ratings:
+            newBurger = True
+            for name, infos in burgers.items():
+                if Levenshtein.distance(name, rating.burgerName) < 3:
+                   newBurger = False
+                   burgers[name]['count'] += 1
+                   burgers[name]['meatRating'] = (rating.meatRating+burgers[name]['meatRating'])/burgers[name]['count']
+                   burgers[name]['sauceRating'] = (rating.sauceRating+burgers[name]['sauceRating'])/burgers[name]['count']
+                   burgers[name]['burgerQualityRating'] = (rating.burgerQualityRating+burgers[name]['burgerQualityRating'])/burgers[name]['count']
+            if newBurger:
+                burgers.update({rating.burgerName:{"meatRating": rating.meatRating, "sauceRating": rating.sauceRating, "burgerQualityRating": rating.burgerQualityRating, "count": 1}})
+        print(burgers)
+
+        return render_template('restaurantDetails.html', restaurant=restaurant, burgers=burgers)
     else:
         return redirect(url_for("listRestaurants"))
 
