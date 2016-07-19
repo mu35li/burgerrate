@@ -3,3 +3,4 @@ Flask-WTF
 Flask-SQLAlchemy
 Flask-Login
 itsdangerous
+python-Levenshtein

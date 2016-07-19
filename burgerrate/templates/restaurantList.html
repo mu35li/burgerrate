@@ -14,7 +14,7 @@
       <img>
     </div>
     <div class="content">
-      <a class="header">{{ restaurant.name }}</a>
+      <a class="header" href="{{url_for('restaurantDetails', restaurantId=restaurant.id)}}">{{ restaurant.name }}</a>
       <div class="meta">
         <span class="date">Added yesterday</span>
       </div>

@@ -18,7 +18,7 @@ def newRestaurant():
     return render_template('newRestaurant.html', form=restaurantForm)
 
 @app.route("/restaurants")
-def listRestaurants():
+def listRestaurants(restaurantId=None):
     restaurants = Restaurant.query.all()
     return render_template('restaurantList.html', restaurants=restaurants)
 
@@ -51,7 +51,15 @@ def addRating(restaurantId):
 def admin():
     restaurants = Restaurant.query.all()
     return render_template("admin.html", restaurants=restaurants)
-    
+
+@app.route("/restaurants/<restaurantId>", methods=(["GET"]))
+def restaurantDetails(restaurantId):
+    if restaurantId is not None:
+        restaurant = Restaurant.query.get(restaurantId)
+        return render_template('restaurantRating.html', restaurant=restaurant)
+    else:
+        return redirect(url_for("listRestaurants"))
+
 def updateRestaurant(restaurant):
     ratings = Rating.query.filter_by(restaurantId=restaurant.id).all()
     restaurant = Restaurant.query.get(restaurant.id)
