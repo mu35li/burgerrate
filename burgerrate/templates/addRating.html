@@ -8,14 +8,44 @@
 <h2>Service</h2>
   <div class="field">
     <label>{{ form.offerRating.label }}</label>
+    <div class="ui message">
+      <p>How extensive was the offer?<br>
+      Example criteria:
+        <ul>
+          <li>Varieties of meat e.g. Chicken, Beef</li>
+          <li>Do they offer different buns?</li>
+          <li>Can you order different levels of doneness?</li>
+          <li>Do they offer something special like homemade ice tea or lemonade?</li>
+        </ul>
+      </p>
+    </div>
     {{ form.offerRating }}
   </div>
   <div class="field">
     <label>{{ form.waiterRating.label }}</label>
+    <div class="ui message">
+      <p>How well did they serve you?<br>
+      Example criteria:
+        <ul>
+          <li>Friendlyness</li>
+          <li>Speed</li>
+        </ul>
+      </p>
+    </div>
     {{ form.waiterRating }}
   </div>
   <div class="field">
     <label>{{ form.athmosphereRating.label }}</label>
+    <div class="ui message">
+      <p>Rate the atmosphere of the restaurant.<br>
+      Example criteria:
+        <ul>
+          <li>Loudness of music</li>
+          <li>Theming</li>
+          <li>Lighting</li>
+        </ul>
+      </p>
+    </div>
     {{ form.athmosphereRating }}
   </div>
   <div class="ui divider"></div>
@@ -26,14 +56,32 @@
   </div>
   <div class="field">
     <label>{{ form.meatRating.label }}</label>
+    <div class="ui message">
+      <p>How good was the meat?
+      </p>
+    </div>
     {{ form.meatRating }}
   </div>
   <div class="field">
     <label>{{ form.sauceRating.label }}</label>
+    <div class="ui message">
+      <p>How good was the sauce on its own?<br>
+      </p>
+    </div>
     {{ form.sauceRating }}
   </div>
   <div class="field">
     <label>{{ form.burgerQualityRating.label }}</label>
+    <div class="ui message">
+      <p>How good was the burger?<br>
+      Example criteria:
+        <ul>
+          <li>Did the sauce complimented the taste?</li>
+          <li>Was the burger hot enough?</li>
+          <li>Was each taste distinguishable?</li>
+        </ul>
+      </p>
+    </div>
     {{ form.burgerQualityRating }}
   </div>
   <div class="ui divider"></div>
@@ -44,10 +92,23 @@
   </div>
   <div class="field">
     <label>{{ form.sidesQualityRating.label }}</label>
+    <div class="ui message">
+      <p>How good was the side dish?<br>
+      Example criteria:
+        <ul>
+          <li>Were the fries crispy?</li>
+          <li>Did the sauce fit the side dish?</li>
+        </ul>
+      </p>
+    </div>
     {{ form.sidesQualityRating }}
   </div>
   <div class="field">
     <label>{{ form.sidesQuantityRating.label }}</label>
+    <div class="ui message">
+      <p>Was the side dish enough?
+      </p>
+    </div>
     {{ form.sidesQuantityRating }}
   </div>
   <button class="ui button" type="submit">Add Rating</button>
