@@ -1,7 +1,7 @@
 from burgerrate import app, db
 from burgerrate.forms import RestaurantForm, RatingForm
 from burgerrate.models import Rating, Restaurant
-from flask import render_template, redirect, url_for, json
+from flask import render_template, redirect, url_for, json, request
 import Levenshtein
 
 @app.route("/")
@@ -57,28 +57,51 @@ def admin():
 def restaurantDetails(restaurantId):
     if restaurantId is not None:
         restaurant = Restaurant.query.get(restaurantId)
-        ratings = Rating.query.filter_by(restaurantId=restaurant.id).all()
-
-        burgers = {}
-        for rating in ratings:
-            newBurger = True
-            for name, infos in burgers.items():
-                if Levenshtein.distance(name, rating.burgerName) < 3:
-                   newBurger = False
-                   burgers[name]['count'] += 1
-                   burgers[name]['meatRating'] = (rating.meatRating+burgers[name]['meatRating'])/burgers[name]['count']
-                   burgers[name]['sauceRating'] = (rating.sauceRating+burgers[name]['sauceRating'])/burgers[name]['count']
-                   burgers[name]['burgerQualityRating'] = (rating.burgerQualityRating+burgers[name]['burgerQualityRating'])/burgers[name]['count']
-            if newBurger:
-                burgers.update({rating.burgerName:{"meatRating": rating.meatRating, "sauceRating": rating.sauceRating, "burgerQualityRating": rating.burgerQualityRating, "count": 1}})
-        print(burgers)
+        burgers = getBurgersFromRestaurant(restaurantId)
 
         return render_template('restaurantDetails.html', restaurant=restaurant, burgers=burgers)
     else:
         return redirect(url_for("listRestaurants"))
 
+@app.route("/spellingHints/", methods=(["POST"]))
+def checkSpelling():
+    restaurantId = int(request.form["restaurantId"])
+    mealType = request.form["mealType"]
+    name = request.form["name"]
+    if restaurantId is not None:
+        restaurant = Restaurant.query.get(restaurantId)
+        if mealType == "burger":
+            burgers = getBurgersFromRestaurant(restaurantId)
+            for burgerName, infos in burgers.items():
+                if Levenshtein.distance(name, burgerName) < 3 and name != burgerName:
+                    return burgerName
+            return 200
+        elif mealType == "side":
+            return 501
+        else:
+            return 404
+    else:
+        return 404
+
+def getBurgersFromRestaurant(restaurantId):
+    ratings = Rating.query.filter_by(restaurantId=restaurantId).all()
+
+    burgers = {}
+    for rating in ratings:
+        newBurger = True
+        for name, infos in burgers.items():
+            if name == rating.burgerName:
+               newBurger = False
+               burgers[name]['count'] += 1
+               burgers[name]['meatRating'] = (rating.meatRating+burgers[name]['meatRating'])/burgers[name]['count']
+               burgers[name]['sauceRating'] = (rating.sauceRating+burgers[name]['sauceRating'])/burgers[name]['count']
+               burgers[name]['burgerQualityRating'] = (rating.burgerQualityRating+burgers[name]['burgerQualityRating'])/burgers[name]['count']
+        if newBurger:
+            burgers.update({rating.burgerName:{"meatRating": rating.meatRating, "sauceRating": rating.sauceRating, "burgerQualityRating": rating.burgerQualityRating, "count": 1}})
+    return burgers
+
 def updateRestaurant(restaurant):
-    ratings = Rating.query.filter_by(restaurantId=restaurant.id).all()
+    ratings = Rating.query.filter_by(restaurantId=restaurantid).all()
     restaurant = Restaurant.query.get(restaurant.id)
     offerRating = 0
     offerCount = 0

@@ -5,6 +5,7 @@
 <h1>Add rating for {{restaurant.name}}</h1>
 <form class="ui form" method="POST" action="{{ url_for('addRating', restaurantId=restaurant.id)}}">
 {{ form.csrf_token }}
+<input type="hidden" name="restaurantId" id="restaurantId" value="{{restaurant.id}}">
 <h2>Service</h2>
   <div class="field">
     <label>{{ form.offerRating.label }}</label>
@@ -53,7 +54,12 @@
   <div class="field">
     <label>{{ form.burgerName.label }}</label>
     {{ form.burgerName(size=20) }}
+    <div class="ui hint info message transition hidden">
+      <i class="close icon"></i>
+      <p>Did you mean: <br/></p>
+    </div>
   </div>
+
   <div class="field">
     <label>{{ form.meatRating.label }}</label>
     <div class="ui message">
