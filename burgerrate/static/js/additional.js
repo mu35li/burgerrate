@@ -17,6 +17,7 @@ $('.ratingBar').progress({
 
 $(document).ready(function (){
 	var restaurantId = $('#restaurantId').val();
+
 	$('#burgerName').on('focusout', function() {
 		$.ajax({
 			context: $(this),
@@ -28,13 +29,9 @@ $(document).ready(function (){
 				restaurantId: restaurantId
 			},
 			success: function(data) {
-				console.log("yey "+data);
 				if (typeof data === "string") {
-					console.log("is string");
-					console.log($(this));
 					var messageBox = $(this).closest(".field").find(".hint"); 
-					console.log(messageBox);
-					messageBox.find('p').append("<b>"+data)+"</b>";
+					messageBox.find('p').html("Sure you didn't meant <a href='' id='burgerReplaceLink'>"+data+"</button>");
 					messageBox.removeClass('hidden');
 				}else{
 					console.log(data);
@@ -42,4 +39,14 @@ $(document).ready(function (){
 			}
 		});
 	});
+
+	$("body").on("click", "#burgerReplaceLink", function(event){
+		event.preventDefault();
+		replaceBurger($(this).text());
+		$(this).closest(".hint").addClass("hidden");
+	});
 });
+
+function replaceBurger(burgerName) {
+	$("#burgerName").val(burgerName);
+}

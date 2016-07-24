@@ -73,7 +73,7 @@ def checkSpelling():
         if mealType == "burger":
             burgers = getBurgersFromRestaurant(restaurantId)
             for burgerName, infos in burgers.items():
-                if Levenshtein.distance(name, burgerName) < 3 and name != burgerName:
+                if Levenshtein.distance(name.lower(), burgerName.lower()) < 3 and name != burgerName:
                     return burgerName
             return 200
         elif mealType == "side":
@@ -101,7 +101,7 @@ def getBurgersFromRestaurant(restaurantId):
     return burgers
 
 def updateRestaurant(restaurant):
-    ratings = Rating.query.filter_by(restaurantId=restaurantid).all()
+    ratings = Rating.query.filter_by(restaurantId=restaurant.id).all()
     restaurant = Restaurant.query.get(restaurant.id)
     offerRating = 0
     offerCount = 0
