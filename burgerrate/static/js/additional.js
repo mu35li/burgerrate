@@ -31,7 +31,7 @@ $(document).ready(function (){
 			success: function(data) {
 				if (typeof data === "string") {
 					var messageBox = $(this).closest(".field").find(".hint"); 
-					messageBox.find('p').html("Sure you didn't meant <a href='' id='burgerReplaceLink'>"+data+"</button>");
+					messageBox.find('p').html("Sure you didn't mean <a href='' id='burgerReplaceLink'>"+data+"</button>");
 					messageBox.removeClass('hidden');
 				}else{
 					console.log(data);
