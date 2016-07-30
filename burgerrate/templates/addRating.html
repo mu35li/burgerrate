@@ -3,119 +3,185 @@
 {% block title %}New Rating for {{restaurant.name}}{% endblock %}
 {% block body %}
 <h1>Add rating for {{restaurant.name}}</h1>
+<div class="ui three ordered top attached steps">
+  <div class="active step" data-step="1">
+    <div class="content">
+      <div class="title">Service</div>
+      <div class="description">Rate the service of the restaurant</div>
+    </div>
+  </div>
+  <div class="step" data-step="2">
+    <div class="content">
+      <div class="title">Burger</div>
+      <div class="description">Rate the burger</div>
+    </div>
+  </div>
+  <div class="step" data-step="3">
+    <div class="content">
+      <div class="title">Sides</div>
+      <div class="description">Rate the sides</div>
+    </div>
+  </div>
+</div>
 <form class="ui form" method="POST" action="{{ url_for('addRating', restaurantId=restaurant.id)}}">
 {{ form.csrf_token }}
 <input type="hidden" name="restaurantId" id="restaurantId" value="{{restaurant.id}}">
-<h2>Service</h2>
-  <div class="field">
-    <label>{{ form.offerRating.label }}</label>
-    <div class="ui message">
-      <p>How extensive was the offer?<br>
-      Example criteria:
-        <ul>
-          <li>Varieties of meat e.g. Chicken, Beef</li>
-          <li>Do they offer different buns?</li>
-          <li>Can you order different levels of doneness?</li>
-          <li>Do they offer something special like homemade ice tea or lemonade?</li>
-        </ul>
-      </p>
+  <div class="wizzardpage active" data-step="1" id="one">
+    <div class="field">
+      <label>{{ form.offerRating.label }}</label>
+      <div class="ui message">
+        <p>How extensive was the offer?<br>
+        Example criteria:
+          <ul>
+            <li>Varieties of meat e.g. Chicken, Beef</li>
+            <li>Do they offer different buns?</li>
+            <li>Can you order different levels of doneness?</li>
+            <li>Do they offer something special like homemade ice tea or lemonade?</li>
+          </ul>
+        </p>
+      </div>
+      {{ form.offerRating }}
     </div>
-    {{ form.offerRating }}
-  </div>
-  <div class="field">
-    <label>{{ form.waiterRating.label }}</label>
-    <div class="ui message">
-      <p>How well did they serve you?<br>
-      Example criteria:
-        <ul>
-          <li>Friendlyness</li>
-          <li>Speed</li>
-        </ul>
-      </p>
-    </div>
-    {{ form.waiterRating }}
-  </div>
-  <div class="field">
-    <label>{{ form.athmosphereRating.label }}</label>
-    <div class="ui message">
-      <p>Rate the atmosphere of the restaurant.<br>
-      Example criteria:
-        <ul>
-          <li>Loudness of music</li>
-          <li>Theming</li>
-          <li>Lighting</li>
-        </ul>
-      </p>
-    </div>
-    {{ form.athmosphereRating }}
-  </div>
-  <div class="ui divider"></div>
-<h2>Burger</h2>
-  <div class="field">
-    <label>{{ form.burgerName.label }}</label>
-    {{ form.burgerName(size=20) }}
-    <div class="ui hint yellow message transition hidden">
-      <p></p>
-    </div>
+    <button class="ui right floated button next">Next</button>
   </div>
 
-  <div class="field">
-    <label>{{ form.meatRating.label }}</label>
-    <div class="ui message">
-      <p>How good was the meat?
-      </p>
+  <div class="wizzardpage hidden" data-step="1" id="two">
+    <div class="field">
+      <label>{{ form.waiterRating.label }}</label>
+      <div class="ui message">
+        <p>How well did they serve you?<br>
+        Example criteria:
+          <ul>
+            <li>Friendlyness</li>
+            <li>Speed</li>
+          </ul>
+        </p>
+      </div>
+      {{ form.waiterRating }}
     </div>
-    {{ form.meatRating }}
+    <button class="ui right floated button next">Next</button>
+    <button class="ui right floated button previous">Back</button>
   </div>
-  <div class="field">
-    <label>{{ form.sauceRating.label }}</label>
-    <div class="ui message">
-      <p>How good was the sauce on its own?<br>
-      </p>
+  
+  <div class="wizzardpage hidden" data-step="1" id="three">
+    <div class="field">
+      <label>{{ form.athmosphereRating.label }}</label>
+      <div class="ui message">
+        <p>Rate the atmosphere of the restaurant.<br>
+        Example criteria:
+          <ul>
+            <li>Loudness of music</li>
+            <li>Theming</li>
+            <li>Lighting</li>
+          </ul>
+        </p>
+      </div>
+      {{ form.athmosphereRating }}
     </div>
-    {{ form.sauceRating }}
+    <button class="ui right floated button next">Next</button>
+    <button class="ui right floated button previous">Back</button>
   </div>
-  <div class="field">
-    <label>{{ form.burgerQualityRating.label }}</label>
-    <div class="ui message">
-      <p>How good was the burger?<br>
-      Example criteria:
-        <ul>
-          <li>Did the sauce complimented the taste?</li>
-          <li>Was the burger hot enough?</li>
-          <li>Was each taste distinguishable?</li>
-        </ul>
-      </p>
+
+  <div class="wizzardpage hidden" data-step="2" id="four">
+    <div class="field">
+      <label>{{ form.burgerName.label }}</label>
+      {{ form.burgerName(size=20) }}
+      <div class="ui hint yellow message transition hidden">
+        <p></p>
+      </div>
     </div>
-    {{ form.burgerQualityRating }}
+    <button class="ui right floated button next">Next</button>
+    <button class="ui right floated button previous">Back</button>
   </div>
-  <div class="ui divider"></div>
-  <h2>Side dish</h2>
-  <div class="field">
-    <label>{{ form.sideName.label }}</label>
-    {{ form.sideName(size=20) }}
-  </div>
-  <div class="field">
-    <label>{{ form.sidesQualityRating.label }}</label>
-    <div class="ui message">
-      <p>How good was the side dish?<br>
-      Example criteria:
-        <ul>
-          <li>Were the fries crispy?</li>
-          <li>Did the sauce fit the side dish?</li>
-        </ul>
-      </p>
+
+  <div class="wizzardpage hidden" data-step="2" id="five">
+    <div class="field">
+      <label>{{ form.meatRating.label }}</label>
+      <div class="ui message">
+        <p>How good was the meat?
+        </p>
+      </div>
+      {{ form.meatRating }}
     </div>
-    {{ form.sidesQualityRating }}
+    <button class="ui right floated button next">Next</button>
+    <button class="ui right floated button previous">Back</button>
   </div>
-  <div class="field">
-    <label>{{ form.sidesQuantityRating.label }}</label>
-    <div class="ui message">
-      <p>Was the side dish enough?
-      </p>
+  
+  <div class="wizzardpage hidden" data-step="2" id="six">
+    <div class="field">
+      <label>{{ form.sauceRating.label }}</label>
+      <div class="ui message">
+        <p>How good was the sauce on its own?<br>
+        </p>
+      </div>
+      {{ form.sauceRating }}
     </div>
-    {{ form.sidesQuantityRating }}
+    <button class="ui right floated button next">Next</button>
+    <button class="ui right floated button previous">Back</button>
   </div>
-  <button class="ui button" type="submit">Add Rating</button>
+  
+  <div class="wizzardpage hidden" data-step="2" id="seven">
+    <div class="field">
+      <label>{{ form.burgerQualityRating.label }}</label>
+      <div class="ui message">
+        <p>How good was the burger?<br>
+          Example criteria:
+          <ul>
+            <li>Did the sauce complimented the taste?</li>
+            <li>Was the burger hot enough?</li>
+            <li>Was each taste distinguishable?</li>
+          </ul>
+        </p>
+      </div>
+      {{ form.burgerQualityRating }}
+    </div>
+    <button class="ui right floated button next">Next</button>
+    <button class="ui right floated button previous">Back</button>
+  </div>
+
+  <div class="wizzardpage hidden" data-step="3" id="eight">
+    <div class="field">
+      <label>{{ form.sideName.label }}</label>
+      {{ form.sideName(size=20) }}
+    </div>
+    <button class="ui right floated button next">Next</button>
+    <button class="ui right floated button previous">Back</button>
+  </div>
+
+  <div class="wizzardpage hidden" data-step="3" id="nine">
+    <div class="field">
+      <label>{{ form.sidesQualityRating.label }}</label>
+      <div class="ui message">
+        <p>How good was the side dish?<br>
+          Example criteria:
+          <ul>
+            <li>Were the fries crispy?</li>
+            <li>Did the sauce fit the side dish?</li>
+          </ul>
+        </p>
+      </div>
+      {{ form.sidesQualityRating }}
+    </div>
+    <button class="ui right floated button next">Next</button>
+    <button class="ui right floated button previous">Back</button>
+  </div>
+  
+  <div class="wizzardpage hidden" data-step="3" id="ten">
+    <div class="field">
+      <label>{{ form.sidesQuantityRating.label }}</label>
+      <div class="ui message">
+        <p>Was the side dish enough?
+        </p>
+      </div>
+      {{ form.sidesQuantityRating }}
+    </div>
+    <button class="ui right floated button next">Next</button>
+    <button class="ui right floated button previous">Back</button>
+  </div>
+
+  <div class="wizzardpage hidden" data-step="4" id="final">
+    <button class="ui right floated success button" type="submit">Add Rating</button>
+    <button class="ui right floated button previous">Back</button>
+  </div>
 </form>
 {% endblock %}
