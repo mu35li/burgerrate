@@ -33,13 +33,6 @@
         <a class="{% if activePage == 'newRestaurant' %}active{% endif %} item" href="{{ url_for('newRestaurant') }}">
           <i class="plus icon"></i> Add Restaurant
         </a>
-        <div class="right menu">
-          <div class="item">
-            <div class="ui transparent icon input">
-              <input type="text" placeholder="Search...">
-            </div>
-          </div>
-        </div>
       </div>
     {% block body %}
     {% endblock %}
