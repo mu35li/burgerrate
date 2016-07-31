@@ -27,25 +27,28 @@
 {{ form.csrf_token }}
 <input type="hidden" name="restaurantId" id="restaurantId" value="{{restaurant.id}}">
   <div class="wizzardpage active" data-step="1" id="one">
-    <div class="field">
-      <label>{{ form.offerRating.label }}</label>
-      <div class="ui message">
-        <p>How extensive was the offer?<br>
-        Example criteria:
-          <ul>
-            <li>Varieties of meat e.g. Chicken, Beef</li>
-            <li>Do they offer different buns?</li>
-            <li>Can you order different levels of doneness?</li>
-            <li>Do they offer something special like homemade ice tea or lemonade?</li>
-          </ul>
-        </p>
+    <div class="ui very padded innerpage segment">
+      <div class="field">
+        <label>{{ form.offerRating.label }}</label>
+        <div class="ui message">
+          <p>How extensive was the offer?<br>
+            Example criteria:
+            <ul>
+              <li>Varieties of meat e.g. Chicken, Beef</li>
+              <li>Do they offer different buns?</li>
+              <li>Can you order different levels of doneness?</li>
+              <li>Do they offer something special like homemade ice tea or lemonade?</li>
+            </ul>
+          </p>
+        </div>
+        {{ form.offerRating }}
       </div>
-      {{ form.offerRating }}
     </div>
-    <button class="ui right floated button next">Next</button>
+    <button class="ui right floated next teal button">Next</button>
   </div>
 
   <div class="wizzardpage hidden" data-step="1" id="two">
+  <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.waiterRating.label }}</label>
       <div class="ui message">
@@ -59,11 +62,13 @@
       </div>
       {{ form.waiterRating }}
     </div>
-    <button class="ui right floated button next">Next</button>
-    <button class="ui right floated button previous">Back</button>
+    </div>
+    <button class="ui right floated next teal button">Next</button>
+    <button class="ui right floated previous button">Back</button>
   </div>
   
   <div class="wizzardpage hidden" data-step="1" id="three">
+  <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.athmosphereRating.label }}</label>
       <div class="ui message">
@@ -78,11 +83,13 @@
       </div>
       {{ form.athmosphereRating }}
     </div>
-    <button class="ui right floated button next">Next</button>
-    <button class="ui right floated button previous">Back</button>
+    </div>
+    <button class="ui right floated next teal button">Next</button>
+    <button class="ui right floated previous button">Back</button>
   </div>
 
   <div class="wizzardpage hidden" data-step="2" id="four">
+  <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.burgerName.label }}</label>
       {{ form.burgerName(size=20) }}
@@ -90,11 +97,13 @@
         <p></p>
       </div>
     </div>
-    <button class="ui right floated button next">Next</button>
-    <button class="ui right floated button previous">Back</button>
+    </div>
+    <button class="ui right floated next teal button">Next</button>
+    <button class="ui right floated previous button">Back</button>
   </div>
 
   <div class="wizzardpage hidden" data-step="2" id="five">
+  <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.meatRating.label }}</label>
       <div class="ui message">
@@ -103,11 +112,13 @@
       </div>
       {{ form.meatRating }}
     </div>
-    <button class="ui right floated button next">Next</button>
-    <button class="ui right floated button previous">Back</button>
+    </div>
+    <button class="ui right floated next teal button">Next</button>
+    <button class="ui right floated previous button">Back</button>
   </div>
   
   <div class="wizzardpage hidden" data-step="2" id="six">
+  <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.sauceRating.label }}</label>
       <div class="ui message">
@@ -116,11 +127,13 @@
       </div>
       {{ form.sauceRating }}
     </div>
-    <button class="ui right floated button next">Next</button>
-    <button class="ui right floated button previous">Back</button>
+    </div>
+    <button class="ui right floated next teal button">Next</button>
+    <button class="ui right floated previous button">Back</button>
   </div>
   
   <div class="wizzardpage hidden" data-step="2" id="seven">
+  <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.burgerQualityRating.label }}</label>
       <div class="ui message">
@@ -135,20 +148,24 @@
       </div>
       {{ form.burgerQualityRating }}
     </div>
-    <button class="ui right floated button next">Next</button>
-    <button class="ui right floated button previous">Back</button>
+    </div>
+    <button class="ui right floated next teal button">Next</button>
+    <button class="ui right floated previous button">Back</button>
   </div>
 
   <div class="wizzardpage hidden" data-step="3" id="eight">
+  <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.sideName.label }}</label>
       {{ form.sideName(size=20) }}
     </div>
-    <button class="ui right floated button next">Next</button>
-    <button class="ui right floated button previous">Back</button>
+    </div>
+    <button class="ui right floated next teal button">Next</button>
+    <button class="ui right floated previous button">Back</button>
   </div>
 
   <div class="wizzardpage hidden" data-step="3" id="nine">
+  <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.sidesQualityRating.label }}</label>
       <div class="ui message">
@@ -162,11 +179,13 @@
       </div>
       {{ form.sidesQualityRating }}
     </div>
-    <button class="ui right floated button next">Next</button>
-    <button class="ui right floated button previous">Back</button>
+    </div>
+    <button class="ui right floated next teal button">Next</button>
+    <button class="ui right floated previous button">Back</button>
   </div>
   
   <div class="wizzardpage hidden" data-step="3" id="ten">
+  <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.sidesQuantityRating.label }}</label>
       <div class="ui message">
@@ -175,13 +194,18 @@
       </div>
       {{ form.sidesQuantityRating }}
     </div>
-    <button class="ui right floated button next">Next</button>
-    <button class="ui right floated button previous">Back</button>
+    </div>
+    <button class="ui right floated teal next teal button">Next</button>
+    <button class="ui right floated previous button">Back</button>
   </div>
 
   <div class="wizzardpage hidden" data-step="4" id="final">
-    <button class="ui right floated success button" type="submit">Add Rating</button>
-    <button class="ui right floated button previous">Back</button>
+    <div class="ui very padded center aligned innerpage segment">
+      <div class="ui middle aligned centered grid">
+        <button class="ui massive green final button" type="submit">Add Rating</button>
+      </div>
+    </div>
+    <button class="ui right floated previous button">Back</button>
   </div>
 </form>
 {% endblock %}

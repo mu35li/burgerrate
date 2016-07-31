@@ -4,9 +4,16 @@
 
 .wizzardpage{
 	margin-top:50px;
-	min-height: 300px;
 	padding-bottom: 50px;
 }
 .wizzardpage.hidden{
 	display: none;
+}
+
+.innerpage{
+	min-height: 400px;
+}
+
+.final.button{
+	margin-top: 10%;
 }
