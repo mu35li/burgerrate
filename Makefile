@@ -1,4 +1,4 @@
-.PHONY: setup venv-setup
+.PHONY: run setup init-db
 
 run:
 	./scripts/run.sh
