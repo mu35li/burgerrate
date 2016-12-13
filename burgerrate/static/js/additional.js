@@ -64,6 +64,10 @@ $(document).ready(function (){
 		$(this).parents(".wizzardpage").prev(".wizzardpage").removeClass("hidden");
 		updateStep($(this).parents(".wizzardpage").prev(".wizzardpage").data("step"));
 	});
+
+	$(".addrating").on("click", function() {
+		location.href=$(this).data("url");
+	});
 });
 
 function replaceBurger(burgerName) {

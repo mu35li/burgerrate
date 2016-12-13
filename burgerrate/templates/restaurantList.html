@@ -16,7 +16,7 @@
     <div class="content">
       <a class="header" href="{{url_for('restaurantDetails', restaurantId=restaurant.id)}}">{{ restaurant.name }}</a>
       <div class="meta">
-        <span class="date">Added yesterday</span>
+        <span class="date"></span>
       </div>
       <div class="description">
         Burger restaurant in Hamburg
@@ -49,9 +49,14 @@
             <div class="progress">{{ restaurant.serviceRating | round(1) }}</div>
           </div>
         </div>
-        <a href="{{url_for('addRating', restaurantId=restaurant.id)}}">Add another rating.</a>
+        <button class="ui primary addrating button" data-url="{{url_for('addRating', restaurantId=restaurant.id)}}">
+          Add another rating
+        </button> 
     {% else %}
-       <a href="{{url_for('addRating', restaurantId=restaurant.id)}}">Restaurant not rated yet. Rate Now!</a>
+    Restaurant not rated yet.
+    <button class="ui primary addrating button" data-url="{{url_for('addRating', restaurantId=restaurant.id)}}">
+      Rate Now!
+    </button> 
     {% endif %}
     </div>
   </div>
