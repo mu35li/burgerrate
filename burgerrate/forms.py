@@ -3,7 +3,7 @@ from wtforms import StringField, SelectField, validators
 
 class RatingForm(Form):
     ratingNumbers = [('0', '0'), ('1', '1'),('2', '2'),('3', '3'),('4', '4'),('5', '5'),('6', '6'),('7', '7'),('8', '8'),('9', '9'),('10', '10')]
-    offerRating = SelectField('Offer', choices = ratingNumbers)
+    offerRating = SelectField('Menu', choices = ratingNumbers)
     waiterRating = SelectField('Waiter', choices = ratingNumbers)
     athmosphereRating = SelectField('Athmosphere', choices = ratingNumbers)
     burgerName = StringField('Burger Name', [validators.DataRequired()])

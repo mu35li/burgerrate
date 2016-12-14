@@ -23,15 +23,16 @@
     </div>
   </div>
 </div>
-<form class="ui form" method="POST" action="{{ url_for('addRating', restaurantId=restaurant.id)}}">
+<form class="ui sixteen wide column form" method="POST" action="{{ url_for('addRating', restaurantId=restaurant.id)}}">
 {{ form.csrf_token }}
 <input type="hidden" name="restaurantId" id="restaurantId" value="{{restaurant.id}}">
   <div class="wizzardpage active" data-step="1" id="one">
     <div class="ui very padded innerpage segment">
       <div class="field">
         <label>{{ form.offerRating.label }}</label>
+        {{ form.offerRating }}
         <div class="ui message">
-          <p>How extensive was the offer?<br>
+          <p>How extensive was the menu?<br>
             Example criteria:
             <ul>
               <li>Varieties of meat e.g. Chicken, Beef</li>
@@ -41,7 +42,6 @@
             </ul>
           </p>
         </div>
-        {{ form.offerRating }}
       </div>
     </div>
     <button class="ui right floated next teal button">Next</button>
@@ -51,6 +51,7 @@
   <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.waiterRating.label }}</label>
+      {{ form.waiterRating }}
       <div class="ui message">
         <p>How well did they serve you?<br>
         Example criteria:
@@ -60,7 +61,6 @@
           </ul>
         </p>
       </div>
-      {{ form.waiterRating }}
     </div>
     </div>
     <button class="ui right floated next teal button">Next</button>
@@ -71,6 +71,7 @@
   <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.athmosphereRating.label }}</label>
+      {{ form.athmosphereRating }}
       <div class="ui message">
         <p>Rate the atmosphere of the restaurant.<br>
         Example criteria:
@@ -81,7 +82,6 @@
           </ul>
         </p>
       </div>
-      {{ form.athmosphereRating }}
     </div>
     </div>
     <button class="ui right floated next teal button">Next</button>
@@ -106,11 +106,11 @@
   <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.meatRating.label }}</label>
+      {{ form.meatRating }}
       <div class="ui message">
         <p>How good was the meat?
         </p>
       </div>
-      {{ form.meatRating }}
     </div>
     </div>
     <button class="ui right floated next teal button">Next</button>
@@ -121,11 +121,11 @@
   <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.sauceRating.label }}</label>
+      {{ form.sauceRating }}
       <div class="ui message">
         <p>How good was the sauce on its own?<br>
         </p>
       </div>
-      {{ form.sauceRating }}
     </div>
     </div>
     <button class="ui right floated next teal button">Next</button>
@@ -136,6 +136,7 @@
   <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.burgerQualityRating.label }}</label>
+      {{ form.burgerQualityRating }}
       <div class="ui message">
         <p>How good was the burger?<br>
           Example criteria:
@@ -146,7 +147,6 @@
           </ul>
         </p>
       </div>
-      {{ form.burgerQualityRating }}
     </div>
     </div>
     <button class="ui right floated next teal button">Next</button>
@@ -168,6 +168,7 @@
   <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.sidesQualityRating.label }}</label>
+      {{ form.sidesQualityRating }}
       <div class="ui message">
         <p>How good was the side dish?<br>
           Example criteria:
@@ -177,7 +178,6 @@
           </ul>
         </p>
       </div>
-      {{ form.sidesQualityRating }}
     </div>
     </div>
     <button class="ui right floated next teal button">Next</button>
@@ -188,11 +188,12 @@
   <div class="ui very padded innerpage segment">
     <div class="field">
       <label>{{ form.sidesQuantityRating.label }}</label>
+      {{ form.sidesQuantityRating }}
       <div class="ui message">
+      Example criteria:
         <p>Was the side dish enough?
         </p>
       </div>
-      {{ form.sidesQuantityRating }}
     </div>
     </div>
     <button class="ui right floated teal next teal button">Next</button>

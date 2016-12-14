@@ -49,14 +49,14 @@
             <div class="progress">{{ restaurant.serviceRating | round(1) }}</div>
           </div>
         </div>
-        <button class="ui primary addrating button" data-url="{{url_for('addRating', restaurantId=restaurant.id)}}">
+        <a class="ui primary addrating button" href="{{url_for('addRating', restaurantId=restaurant.id)}}">
           Add another rating
-        </button> 
+        </a> 
     {% else %}
     Restaurant not rated yet.
-    <button class="ui primary addrating button" data-url="{{url_for('addRating', restaurantId=restaurant.id)}}">
+    <a class="ui primary addrating button" href="{{url_for('addRating', restaurantId=restaurant.id)}}">
       Rate Now!
-    </button> 
+    </a> 
     {% endif %}
     </div>
   </div>
