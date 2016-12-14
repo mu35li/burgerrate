@@ -1,7 +1,7 @@
 from burgerrate import app, db
 from burgerrate.forms import RestaurantForm, RatingForm
 from burgerrate.models import Rating, Restaurant
-from flask import render_template, redirect, url_for, json, request
+from flask import render_template, redirect, url_for, json, request, jsonify
 import Levenshtein
 
 @app.route("/")
@@ -63,23 +63,17 @@ def restaurantDetails(restaurantId):
     else:
         return redirect(url_for("listRestaurants"))
 
-@app.route("/spellingHints/", methods=(["POST"]))
-def checkSpelling():
+@app.route("/autocomplete/", methods=(["POST"]))
+def autoComplete():
     restaurantId = int(request.form["restaurantId"])
     mealType = request.form["mealType"]
-    name = request.form["name"]
-    if restaurantId is not None:
-        restaurant = Restaurant.query.get(restaurantId)
-        if mealType == "burger":
-            burgers = getBurgersFromRestaurant(restaurantId)
-            for burgerName, infos in burgers.items():
-                if Levenshtein.distance(name.lower(), burgerName.lower()) < 3 and name != burgerName:
-                    return burgerName
-            return 200
-        elif mealType == "side":
-            return 501
-        else:
-            return 404
+    restaurant = Restaurant.query.get(restaurantId)
+    if mealType == "burger":
+        burgers = getBurgersFromRestaurant(restaurantId)
+        return jsonify(burgers)
+    elif mealType == "side":
+        sides = getSidesFromRestaurant(restaurantId)
+        return jsonify(sides)
     else:
         return 404
 
@@ -99,6 +93,22 @@ def getBurgersFromRestaurant(restaurantId):
         if newBurger:
             burgers.update({rating.burgerName:{"meatRating": rating.meatRating, "sauceRating": rating.sauceRating, "burgerQualityRating": rating.burgerQualityRating, "count": 1}})
     return burgers
+
+def getSidesFromRestaurant(restaurantId):
+    ratings = Rating.query.filter_by(restaurantId=restaurantId).all()
+
+    sides = {}
+    for rating in ratings:
+        newSide = True
+        for name, infos in sides.items():
+            if name == rating.sideName:
+               newSide = False
+               sides[name]['count'] += 1
+               sides[name]['sidesQualityRating'] = (rating.sidesQualityRating+sides[name]['sidesQualityRating'])/sides[name]['count']
+               sides[name]['sidesQuantityRating'] = (rating.sidesQuantityRating+sides[name]['sidesQuantityRating'])/sides[name]['count']
+        if newSide:
+            sides.update({rating.sideName:{"sidesQualityRating": rating.sidesQualityRating, "sidesQuantityRating": rating.sidesQuantityRating, "count": 1}})
+    return sides
 
 def updateRestaurant(restaurant):
     ratings = Rating.query.filter_by(restaurantId=restaurant.id).all()

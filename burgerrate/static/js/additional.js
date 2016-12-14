@@ -16,29 +16,6 @@ $('.ratingBar').progress({
 });
 
 $(document).ready(function (){
-    var restaurantId = $('#restaurantId').val();
-
-    $('#burgerName').on('focusout', function() {
-        $.ajax({
-            context: $(this),
-            url: '/spellingHints/',
-            method: "POST",
-            data: {
-                name: $(this).val(),
-                mealType: "burger",
-                restaurantId: restaurantId
-            },
-            success: function(data) {
-                if (typeof data === "string") {
-                    var messageBox = $(this).closest(".field").find(".hint"); 
-                    messageBox.find('p').html("Sure you didn't mean <a href='' id='burgerReplaceLink'>"+data+"</button>");
-                    messageBox.removeClass('hidden');
-                }else{
-                    console.log(data);
-                }
-            }
-        });
-    });
 
     $('.ui.form')
     .form({
